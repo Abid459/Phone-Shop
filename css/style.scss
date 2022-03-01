@@ -10,3 +10,20 @@
 
     }
 }
+
+button{
+    outline:0;
+    border:0;
+    padding:10px 20px;
+    border-radius: 9px;
+    color:antiquewhite;
+    background: #000;
+}
+.show-more{
+    text-align: center;
+    button{
+        padding:10px 40px;
+        margin: 30px 0;
+
+    }
+}

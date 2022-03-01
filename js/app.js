@@ -1,16 +1,40 @@
 const inputName = document.querySelector('#inputName');
 const searchResultParent = document.querySelector('#search-result');
 const detailsResult = document.querySelector('.details');
+const showMore = document.querySelector('.show-more');
+
+let fetchData = '';
+let range = 20;
+let count = 0;
 
 const search = () => {
+
     const searchText = inputName.value;
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+    inputName.value = '';
     fetch(url)
         .then(res => res.json())
-        .then(data => display(data.data))
+        .then(data => {
+            fetchData = data.data;
+            display(fetchData)
+        })
 }
 const display = phones => {
     for (let phone of phones) {
+        if (count >= range) {
+            const showMoreBtn = document.createElement('button')
+            showMoreBtn.innerText = 'Show More';
+            showMore.appendChild(showMoreBtn);
+            showMore.addEventListener('click', () => {
+                range = 10000;
+                display(fetchData);
+                showMore.removeChild(showMoreBtn);
+
+            })
+
+            return;
+        }
+        count++;
         const newDiv = document.createElement('div');
         newDiv.innerHTML = `
         <div class="col">
@@ -44,9 +68,9 @@ const displayDetails = details => {
     const detailsDisplay = document.createElement('div');
     const feature = details.data.mainFeatures;
     const sensors = feature.sensors;
-    const otherFeature =Object.entries( details.data.others);
+    const otherFeature = Object.entries(details.data.others);
     console.log(otherFeature);
-    detailsDisplay.innerHTML=`
+    detailsDisplay.innerHTML = `
             <p><b>cheaprset:</b> ${feature.chipSet}</p>
               <p><b>Memory:</b> ${feature.memory}</p>
               <p><b>Storage:</b> ${feature.storage}</p>
@@ -83,6 +107,6 @@ const displayDetails = details => {
     `
     detailsResult.appendChild(detailsDisplay);
 }
-const showSensors = sensors =>{
+const showSensors = sensors => {
 
 }
