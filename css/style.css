@@ -1,0 +1,12 @@
+.details {
+  background: #d8d8d8;
+  padding: 20px;
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 30px;
+}
+
+.details p {
+  border-bottom: 1px solid white;
+}
+/*# sourceMappingURL=style.css.map */
