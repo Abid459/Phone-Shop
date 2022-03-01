@@ -14,8 +14,8 @@ const display = phones => {
         const newDiv = document.createElement('div');
         newDiv.innerHTML = `
         <div class="col">
-              <div class="card">
-                <img src="${phone.image}" class="card-img-top" alt="...">
+              <div class="card p-3 text-center">
+                <img src="${phone.image}" class="card-img-top w-75  p-5 mx-auto" alt="...">
                 <div class="card-body">
                   <h4 class="card-title">${phone.phone_name}</h4>
                   <p class="card-text">Release Date</p>
@@ -26,7 +26,7 @@ const display = phones => {
             </div>
         `;
         searchResultParent.appendChild(newDiv)
-        console.log(phone)
+        // console.log(phone)
     }
 }
 
@@ -34,22 +34,55 @@ const showDetails = phoneId => {
     fetch(`https://openapi.programming-hero.com/api/phone/${phoneId}`)
         .then(res => res.json())
         .then(details => {
-            // console.log(details);
+            // console.log(details.data);
             displayDetails(details);
         })
-    console.log(phoneId)
+    // console.log(phoneId)
 }
 
 const displayDetails = details => {
     const detailsDisplay = document.createElement('div');
     const feature = details.data.mainFeatures;
+    const sensors = feature.sensors;
+    const otherFeature =Object.entries( details.data.others);
+    console.log(otherFeature);
     detailsDisplay.innerHTML=`
-            <p>cheaprset: ${feature.chipSet}</p>
-              <p>Memory : ${feature.memory}</p>
-              <p>Storage:${feature.storage}</p>
-              <p>Display Size:${feature.displaySize}</p>
-              <p>Sensors<ion-icon name="caret-down-outline"></ion-icon></p>
-              <p>Others<ion-icon name="caret-down-outline"></ion-icon></p>
+            <p><b>cheaprset:</b> ${feature.chipSet}</p>
+              <p><b>Memory:</b> ${feature.memory}</p>
+              <p><b>Storage:</b> ${feature.storage}</p>
+              <p><b>Display Size:</b> ${feature.displaySize}</p>
+
+              <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Sensors
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    ${sensors}
+                  </div>
+                </div>
+              </div>
+            
+
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Others
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+              ${otherFeature}
+              </div>
+            </div>
+          </div>
+          </div>
     `
     detailsResult.appendChild(detailsDisplay);
+}
+const showSensors = sensors =>{
+
 }
