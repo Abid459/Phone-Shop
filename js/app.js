@@ -70,7 +70,6 @@ const display = phones => {
                 <img src="${phone.image}" class="card-img-top w-75  p-5 mx-auto" alt="...">
                 <div class="card-body">
                   <h4 class="card-title">${phone.phone_name}</h4>
-                  <p class="card-text" id= "dateUpdate" onload = "add()">Release Date:"${add(phone.slug)}"</p>
                  <h4>Brand: ${phone.brand}</h4>
                   <button onclick = "showDetails('${phone.slug}')">See details</button>
                 </div>
@@ -98,14 +97,19 @@ const showDetails = phoneId => {
 }
 
 const displayDetails = details => {
+  console.log(details)
     detailsResult.textContent = '';
     detailsResult.style.display = "block";
     const detailsDisplay = document.createElement('div');
     const feature = details.data.mainFeatures;
     const sensors = feature.sensors;
-    const otherFeature = Object.entries(details.data.others);
-    console.log(details.data.releaseDate);
+    const otherFeature = details.data?.others ? Object.entries(details.data.others):"No additional feature";
+    const releaseDate =details.data?.releaseDate ? details.data.releaseDate:`<span style = "color:#C77149">No releasedate found</span>`;
     detailsDisplay.innerHTML = `
+    <img src = "${details.data.image}">
+            <p><b>Brand:</b> ${details.data.brand}</p>
+            <p><b>Model:</b> ${details.data.name}</p>
+            <p><b>Release date:</b> ${releaseDate}</p>
             <p><b>cheaprset:</b> ${feature.chipSet}</p>
               <p><b>Memory:</b> ${feature.memory}</p>
               <p><b>Storage:</b> ${feature.storage}</p>
@@ -143,23 +147,3 @@ const displayDetails = details => {
     detailsResult.appendChild(detailsDisplay);
 }
 
-const upadteDate = data => {
-    return data.data.releaseDate;
-}
-let releaseDate = ''
-function add (){
-    fetch(`https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                // const datePera = document.querySelector('#dateUpdate')
-                console.log(data)
-                // var releaseDate = data.data.releaseDate;
-                // datePera.innerText = releaseDate;
-                console.log(releaseDate)
-            })
-            return releaseDate;
-            // return date2;
-}
-const a = add();
-console.log(a);
