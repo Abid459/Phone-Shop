@@ -88,14 +88,18 @@ const displayDetails = details => {
   const detailsDisplay = document.createElement('div');
   const feature = details.data.mainFeatures;
   const sensors = feature.sensors;
+  console.log(feature)
 
   const releaseDate = details.data?.releaseDate ? details.data.releaseDate : `<span style = "color:#C77149">No release date found</span>`;// Release date opitonal chaining
   detailsDisplay.innerHTML = `
             <img src = "${details.data.image}">
             <p><b>Brand:</b> ${details.data.brand}</p>
             <p><b>Model:</b> ${details.data.name}</p>
-            <p><b>Release date:</b> ${releaseDate}</p>
-            <p><b>Cheaprset:</b> ${feature.chipSet}</p>
+            <p><b>Release Date:</b> ${releaseDate}</p>
+            
+            <!-- Main feature------- -->
+
+            <p><b>Chip Set:</b> ${feature.chipSet}</p>
             <p><b>Memory:</b> ${feature.memory}</p>
             <p><b>Storage:</b> ${feature.storage}</p>
             <p><b>Display Size:</b> ${feature.displaySize}</p>
