@@ -1,55 +1,124 @@
-header h2{
-    padding:30px 0;
+$details-bg : #e7e9df;
+$secondary-bg:rgba(255, 251, 251, 0.356);
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+p{
+    word-wrap: break-word;
+}
+// ======header start======
+header h2 {
+    padding: 30px 0;
     text-align: center;
 }
-#spinner{
+#spinner {
     position: fixed;
-    top:45%;
-    left:45%;
+    top: 45%;
+    left: 45%;
     z-index: 11;
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     font-size: 2rem;
     display: none;
 }
-.layer{
-    width:100%;
+.layer {
+    width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.479);
     position: fixed;
-    top:0;
+    top: 0;
     z-index: 10;
     display: none;
 }
-.details{
-    background: rgb(216, 216, 216);
+.scrop-top {
+    // padding: 30px;
+    border: 1px solid silver;
+    background: $secondary-bg;
+    border-radius: 50%;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: 20;
+    overflow: hidden;
+    @include flexCenter();
+
+    a {
+        width: 70px;
+        height: 70px;
+        text-decoration: none;
+        color: rgb(148, 148, 148);
+        
+        ion-icon {
+            transition: .5s;
+            width: 40px;
+            height: 40px;
+            color: rgb(148, 148, 148);
+
+        }
+        p{
+            margin-top:-10px;
+        }
+        &:hover ion-icon {
+            color:rgb(49, 49, 49);
+        }
+    }
+
+    cursor: pointer;
+}
+
+// ======header end======
+
+// ============main section start========
+.details {
+    background: $details-bg;
     padding: 20px;
-    width:40%;
+    max-width: 700px;
     margin: 0 auto 20px;
     border-radius: 30px;
     display: none;
-    position: fixed;
-    top:0;
     z-index: 20;
-    p{
-        border-bottom: 1px solid rgb(255, 255, 255);
-        
 
+    img {
+        width: 50%;
+        margin: 0 auto 10px;
+        background: $secondary-bg;
+        display: flex;
+        justify-content: center;
+        padding: 30px;
+        border: 1px solid silver;
+        border-radius: 5%;
+    }
+
+    p {
+        border-bottom: 1px solid rgb(255, 255, 255);
+        padding-bottom: 10px;
+
+        .other-feature div p:last-child {
+            border: 0;
+        }
     }
 }
 
-button{
-    outline:0;
-    border:0;
-    padding:10px 20px;
+button {
+    outline: 0;
+    border: 0;
+    padding: 10px 20px;
     border-radius: 9px;
-    color:antiquewhite;
+    color: antiquewhite;
     background: #000;
 }
-.show-more{
+
+.show-more {
     text-align: center;
-    button{
-        padding:10px 40px;
+
+    button {
+        padding: 10px 40px;
         margin: 30px 0;
 
     }
 }
+// ============main section end========
